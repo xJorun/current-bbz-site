@@ -1,0 +1,100 @@
+---
+export interface Props {
+  code: string;
+  reward: string;
+  status: 'new' | 'featured' | 'perfect' | 'normal';
+  color: string;
+}
+
+const { code, reward, status, color } = Astro.props;
+---
+
+<div class="code-card" style={`--card-color: ${color}`}>
+  {status !== 'normal' && (
+    <div class="status-badge">{status.toUpperCase()}</div>
+  )}
+  <h3>{code}</h3>
+  <p>{reward}</p>
+  <button class="copy-btn" data-code={code}>COPY CODE</button>
+</div>
+
+<style>
+  .code-card {
+    position: relative;
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--card-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .code-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px var(--card-color);
+  }
+
+  .status-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--card-color);
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .copy-btn {
+    background: var(--card-color);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .copy-btn:active {
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const code = e.target.dataset.code;
+      navigator.clipboard.writeText(code);
+      const original = e.target.textContent;
+      e.target.textContent = 'COPIED!';
+      e.target.style.background = '#00ff00';
+      setTimeout(() => {
+        e.target.textContent = original;
+        e.target.style.background = '';
+      }, 2000);
+    });
+  });
+</script>

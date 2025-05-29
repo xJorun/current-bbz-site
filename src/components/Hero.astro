@@ -1,0 +1,102 @@
+---
+import Button from './Button.astro';
+import Stats from './Stats.astro';
+import SpinningThumbnails from './SpinningThumbnails.astro';
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title bebas">
+      <span class="orange">BASKETBALL</span>
+      <span class="white">ZERO</span>
+    </h1>
+    
+    <p class="hero-subtitle">WHERE LEGENDS ARE FORGED</p>
+    
+    <p class="hero-description">
+      Step into the ultimate online basketball dimension where supernatural
+      abilities collide with intense 5v5 action. Master legendary styles, awaken
+      devastating zones, and prove your dominance on courts that transcend
+      reality itself.
+    </p>
+
+    <Stats />
+
+    <div class="hero-actions">
+      <Button href="https://www.roblox.com/games/130739873848552/EMPEROR-Basketball-Zero" variant="primary">
+        PLAY NOW
+      </Button>
+      <Button href="#trailers" variant="secondary">
+        WATCH TRAILERS
+      </Button>
+    </div>
+  </div>
+
+  <SpinningThumbnails />
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0 4rem;
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.85;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .orange {
+    color: var(--orange);
+    text-shadow: 0 0 30px var(--orange);
+  }
+
+  .white {
+    color: var(--white);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    letter-spacing: 0.3em;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+  }
+</style>

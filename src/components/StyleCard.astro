@@ -1,0 +1,132 @@
+---
+export interface Props {
+  name: string;
+  tier: string;
+  description: string;
+  abilities: Array<{name: string, icon: string}>;
+  color: string;
+}
+
+const { name, tier, description, abilities, color } = Astro.props;
+---
+
+<div class="style-card" style={`--card-color: ${color}`}>
+  <div class="card-header">
+    <span class="tier-badge">{tier}</span>
+  </div>
+  
+  <h3 class="style-name">{name}</h3>
+  <p class="style-tier">{tier}</p>
+  
+  <p class="style-description">{description}</p>
+  
+  <div class="abilities">
+    {abilities.map(ability => (
+      <div class="ability">
+        <span class="ability-icon">{ability.icon}</span>
+        <span class="ability-name">{ability.name}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .style-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--card-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+
+  .style-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--card-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .style-card:hover::before {
+    opacity: 0.1;
+  }
+
+  .style-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-header {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .tier-badge {
+    background: var(--card-color);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .style-name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .style-tier {
+    color: var(--card-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .style-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .abilities {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ability {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    transition: background 0.2s;
+  }
+
+  .ability:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .ability-icon {
+    font-size: 1.25rem;
+  }
+
+  .ability-name {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>

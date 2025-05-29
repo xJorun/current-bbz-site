@@ -1,0 +1,373 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Petals from '../components/Petals.astro';
+import Hero from '../components/Hero.astro';
+import StyleCard from '../components/StyleCard.astro';
+import ZoneCard from '../components/ZoneCard.astro';
+import CodeCard from '../components/CodeCard.astro';
+import TrailerEmbed from '../components/TrailerEmbed.astro';
+import Footer from '../components/Footer.astro';
+
+const styles = [
+  {
+    name: "ACE",
+    tier: "S",
+    description: "The ultimate beginner style combining unmatched offense and defense. Awakened abilities provide unique dodging and scoring that surpass all others.",
+    abilities: [
+      { name: "Perfect Balance", icon: "⚖️" },
+      { name: "Elite Scoring", icon: "🎯" },
+      { name: "Superior Dribbling", icon: "⚡" }
+    ],
+    color: "#ff69b4"
+  },
+  {
+    name: "GIANT",
+    tier: "S",
+    description: "Absolute dominance in the paint with Post Form and Snatch Block. Awakened form guarantees points every time inside the scoring area.",
+    abilities: [
+      { name: "Post Form", icon: "💪" },
+      { name: "Snatch Block", icon: "🛡️" },
+      { name: "Guaranteed Scoring", icon: "🎯" }
+    ],
+    color: "#ff4500"
+  },
+  {
+    name: "EMPEROR",
+    tier: "S+",
+    description: "The newest and most powerful style. Control teammates with Ultimate Pass, dominate with Emperor's Reach, and guarantee points with awakened abilities.",
+    abilities: [
+      { name: "Ultimate Pass", icon: "👑" },
+      { name: "Emperor's Reach", icon: "🤲" },
+      { name: "Guaranteed Point", icon: "⭐" }
+    ],
+    color: "#ffd700"
+  },
+  {
+    name: "PERFECTION",
+    tier: "A",
+    description: "Perfect for rarely with Perfect Dribbling guaranteeing 100% accuracy. Nice teleportation for ultimate defense. Absolute perfection achieved.",
+    abilities: [
+      { name: "Perfect Dribbling", icon: "🏀" },
+      { name: "Nice Teleport", icon: "💫" },
+      { name: "100% Accuracy", icon: "🎯" }
+    ],
+    color: "#90ee90"
+  },
+  {
+    name: "STAR",
+    tier: "A",
+    description: "Recently reworked offensive powerhouse. Enhanced vertical abilities and devastating new dunk animations that score from anywhere in the court.",
+    abilities: [
+      { name: "Enhanced Vertical", icon: "🚀" },
+      { name: "Anywhere Scoring", icon: "⭐" },
+      { name: "Devastating Dunks", icon: "💥" }
+    ],
+    color: "#ff1493"
+  },
+  {
+    name: "COPYCAT",
+    tier: "A",
+    description: "Master of adaptation. Mimic any opponent's style and turn their greatest strengths against them. The ultimate counter style type.",
+    abilities: [
+      { name: "Style Mimicry", icon: "🎭" },
+      { name: "Perfect Counter", icon: "🔄" },
+      { name: "Adaptive Combat", icon: "🧠" }
+    ],
+    color: "#00bfff"
+  }
+];
+
+const zones = [
+  {
+    name: "STREET DRIBBLER",
+    type: "OFFENSE INTENSE",
+    description: "Simplified offense power that dominates street courts, ultimate ball handling and scoring capabilities.",
+    stat: { name: "OFFENSE", color: "#ff4500" },
+    tier: "S"
+  },
+  {
+    name: "LIMITLESS",
+    type: "PERFECT PRECISION",
+    description: "Perfect precision and unlimited range. No shot is too far when you enter the Limitless zone.",
+    stat: { name: "PRECISION", color: "#00bfff" },
+    tier: "S"
+  },
+  {
+    name: "LOCKDOWN",
+    type: "IMPENETRABLE DEFENSE",
+    description: "Your team's defense into an unbreakable defensive fortress. Absolute defensive dominance.",
+    stat: { name: "DEFENSE", color: "#32cd32" },
+    tier: "S"
+  }
+];
+
+const codes = [
+  { code: "EMPERORUPD", reward: "7 Lucky Style + 7 Lucky Zone Spins", status: "new", color: "#dc143c" },
+  { code: "300KEMPEROR", reward: "10 Lucky Spins + Color Rolls", status: "featured", color: "#ffd700" },
+  { code: "PERFECTION", reward: "5 Lucky Spins + Money", status: "perfect", color: "#90ee90" },
+  { code: "STARREWORK", reward: "8 Lucky Style + 6 Lucky Zone Spins", status: "normal", color: "#00bfff" }
+];
+---
+
+<BaseLayout title="Basketball Zero - Where Legends Are Forged">
+  <Navigation />
+  <Petals />
+  
+  <main>
+    <Hero />
+
+    <section id="styles" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">LEGENDARY ARSENAL</span>
+          <h2 class="section-title bebas">
+            MASTER<br>
+            <span class="gradient-text">LEGENDARY STYLES</span>
+          </h2>
+          <p class="section-subtitle">
+            Unlock supernatural basketball abilities that transcend human limits
+          </p>
+        </div>
+
+        <div class="styles-grid">
+          {styles.map(style => <StyleCard {...style} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="zones" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">AWAKENED POWER</span>
+          <h2 class="section-title bebas">
+            LEGENDARY<br>
+            <span class="gradient-text">ZONES</span>
+          </h2>
+          <p class="section-subtitle">
+            Transcend human limits with supernatural auras
+          </p>
+        </div>
+
+        <div class="zones-grid">
+          {zones.map(zone => <ZoneCard {...zone} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="codes" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">FREE REWARDS</span>
+          <h2 class="section-title bebas">
+            ACTIVE<br>
+            <span class="gradient-text">CODES</span>
+          </h2>
+          <p class="section-subtitle">
+            Claim exclusive spins and legendary rewards
+          </p>
+        </div>
+
+        <div class="codes-grid">
+          {codes.map(code => <CodeCard {...code} />)}
+        </div>
+
+        <div class="redeem-instructions">
+          <h3>How to Redeem Codes:</h3>
+          <ol>
+            <li>Launch Basketball Zero on Roblox</li>
+            <li>Look for the Codes button in the main menu</li>
+            <li>Click "Codes" to open the redemption window</li>
+            <li>Enter code and click "Redeem"</li>
+            <li>Enjoy your legendary rewards!</li>
+          </ol>
+          <p class="official-note">
+            <strong>Official Resources:</strong>
+            <a href="https://discord.gg/basketball-zero">Discord Server</a> • 
+            <a href="https://trello.com/b/ivZyBaRh/basketball-rivals-information">Game Trello</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trailers" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">GAMEPLAY SHOWCASE</span>
+          <h2 class="section-title bebas">
+            EPIC<br>
+            <span class="gradient-text">TRAILERS</span>
+          </h2>
+          <p class="section-subtitle">
+            Witness the power and evolution of Basketball Zero
+          </p>
+        </div>
+
+        <div class="trailers-grid">
+          <TrailerEmbed 
+            title="Emperor Style Announcement" 
+            videoUrl="https://res.cloudinary.com/dcyvxzhnl/video/upload/v1748108268/EMPEROR_STYLE_ANNOUNCEMENT___Basketball_Zero_ptlvlz.mp4"
+            badge="LATEST"
+          />
+          <TrailerEmbed 
+            title="Basketball Zero Release Trailer" 
+            videoUrl="https://res.cloudinary.com/dcyvxzhnl/video/upload/v1748107369/RELEASE___Basketball__Zero_yap1iu.mp4"
+          />
+          <TrailerEmbed 
+            title="Ranked Mode Showcase" 
+            videoUrl="https://res.cloudinary.com/dcyvxzhnl/video/upload/v1748108248/videoplayback_1_gji2yy.mp4"
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  main {
+    padding-top: 80px;
+  }
+
+  .section {
+    padding: 6rem 0;
+    position: relative;
+  }
+
+  .section-dark {
+    background: var(--dark);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--orange) 0%, var(--white) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .styles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .codes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .redeem-instructions {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid rgba(255, 69, 0, 0.2);
+    border-radius: 1rem;
+    padding: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .redeem-instructions h3 {
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .redeem-instructions ol {
+    list-style: none;
+    counter-reset: steps;
+  }
+
+  .redeem-instructions li {
+    counter-increment: steps;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .redeem-instructions li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  .official-note {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--gray);
+  }
+
+  .official-note a {
+    color: var(--orange);
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+
+  .official-note a:hover {
+    text-decoration: underline;
+  }
+
+  .trailers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .styles-grid,
+    .zones-grid,
+    .codes-grid,
+    .trailers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

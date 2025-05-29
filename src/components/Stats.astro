@@ -1,0 +1,78 @@
+---
+// Live stats would be fetched from API
+const stats = [
+  { value: '7,215,894,256', label: 'ALL TIME VISITS' },
+  { value: '892,451', label: 'PLAYERS ONLINE' }
+];
+---
+
+<div class="stats-container">
+  {stats.map(stat => (
+    <div class="stat">
+      <div class="stat-value bebas">{stat.value}</div>
+      <div class="stat-label">{stat.label}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-container {
+    display: flex;
+    gap: 4rem;
+    margin: 2rem 0;
+  }
+
+  .stat-value {
+    font-size: 3rem;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    .stats-container {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  // Animate numbers on scroll
+  const animateValue = (el, start, end, duration) => {
+    const range = end - start;
+    const increment = range / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= end) {
+        el.textContent = end.toLocaleString();
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(current).toLocaleString();
+      }
+    }, 16);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const values = entry.target.querySelectorAll('.stat-value');
+        values[0]?.setAttribute('data-animated', 'true');
+        values[1]?.setAttribute('data-animated', 'true');
+      }
+    });
+  });
+
+  const statsContainer = document.querySelector('.stats-container');
+  if (statsContainer) observer.observe(statsContainer);
+</script>

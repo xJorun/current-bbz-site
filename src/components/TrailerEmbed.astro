@@ -1,0 +1,61 @@
+---
+export interface Props {
+  title: string;
+  videoUrl: string;
+  badge?: string;
+}
+
+const { title, videoUrl, badge } = Astro.props;
+---
+
+<div class="trailer-card">
+  {badge && <span class="trailer-badge">{badge}</span>}
+  <h3>{title}</h3>
+  <div class="video-wrapper">
+    <video controls>
+      <source src={videoUrl} type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<style>
+  .trailer-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--orange);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .trailer-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--orange);
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+</style>

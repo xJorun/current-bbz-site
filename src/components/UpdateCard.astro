@@ -1,0 +1,115 @@
+---
+export interface Props {
+  version: string;
+  title: string;
+  date: string;
+  status?: string;
+  changes: string[];
+}
+
+const { version, title, date, status, changes } = Astro.props;
+---
+
+<article class="update-card">
+  <header class="update-header">
+    <div class="version-info">
+      <span class="version">{version}</span>
+      {status && <span class="status-live">LIVE NOW</span>}
+    </div>
+    <time class="date">{date}</time>
+  </header>
+
+  <h3 class="update-title">🏀 {title}</h3>
+
+  <ul class="changes-list">
+    {changes.map(change => (
+      <li>{change}</li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  .update-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid transparent;
+    background-image: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)),
+                      linear-gradient(90deg, var(--orange), transparent);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s;
+  }
+
+  .update-card:hover {
+    transform: translateX(10px);
+  }
+
+  .update-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .version-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .version {
+    background: var(--orange);
+    padding: 0.25rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .status-live {
+    background: #00ff00;
+    color: var(--black);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .date {
+    color: var(--gray);
+    font-size: 0.875rem;
+  }
+
+  .update-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .changes-list {
+    list-style: none;
+  }
+
+  .changes-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+  }
+
+  .changes-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-weight: bold;
+  }
+</style>

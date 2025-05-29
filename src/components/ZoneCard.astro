@@ -1,0 +1,113 @@
+---
+export interface Props {
+  name: string;
+  type: string;
+  description: string;
+  stat: {name: string, color: string};
+  tier: string;
+}
+
+const { name, type, description, stat, tier } = Astro.props;
+---
+
+<div class="zone-card" style={`--zone-color: ${stat.color}`}>
+  <div class="zone-header">
+    <span class="zone-tier">{tier}</span>
+  </div>
+  
+  <h3 class="zone-name">{name}</h3>
+  <p class="zone-type">{type}</p>
+  
+  <p class="zone-description">{description}</p>
+  
+  <div class="zone-stat">
+    <div class="stat-label">{stat.name}</div>
+    <div class="stat-bar">
+      <div class="stat-fill"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .zone-card {
+    background: rgba(10, 10, 10, 0.8);
+    border: 2px solid var(--zone-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .zone-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--zone-color);
+  }
+
+  .zone-header {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .zone-tier {
+    background: var(--zone-color);
+    color: var(--black);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .zone-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .zone-type {
+    color: var(--zone-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .zone-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .zone-stat {
+    margin-top: auto;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat-fill {
+    height: 100%;
+    width: 85%;
+    background: var(--zone-color);
+    transition: width 0.3s;
+  }
+
+  .zone-card:hover .stat-fill {
+    width: 100%;
+  }
+</style>

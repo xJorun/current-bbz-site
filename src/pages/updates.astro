@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Petals from '../components/Petals.astro';
+import UpdateCard from '../components/UpdateCard.astro';
+import Footer from '../components/Footer.astro';
+import { updates } from '../data/updates.js';
+
+// Would fetch from API
+const stats = [
+  { value: "25+", label: "TOTAL UPDATES" },
+  { value: "7.2B+", label: "ALL TIME VISITS" },
+  { value: "15+", label: "UNIQUE STYLES" },
+  { value: "8+", label: "LEGENDARY ZONES" },
+  { value: "Beta", label: "DEVELOPMENT STATUS" }
+];
+---
+
+<BaseLayout title="Updates - Basketball Zero">
+  <Navigation />
+  <Petals />
+  
+  <main>
+    <section class="updates-hero">
+      <div class="container">
+        <h1 class="hero-title bebas">
+          <span class="gradient-text">COMPLETE UPDATE ARCHIVE</span>
+        </h1>
+        <p class="hero-subtitle">
+          The complete evolution of Basketball Zero from beta to legend
+        </p>
+        
+        <div class="stats-grid">
+          {stats.map(stat => (
+            <div class="stat-card">
+              <div class="stat-value bebas">{stat.value}</div>
+              <div class="stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        
+        <a href="/" class="back-link">← BACK TO HOME</a>
+      </div>
+    </section>
+
+    <section class="updates-section">
+      <div class="container">
+        <div class="filter-tabs">
+          <button class="tab active">ALL UPDATES</button>
+          <button class="tab">MAJOR UPDATES</button>
+          <button class="tab">NEW STYLES</button>
+          <button class="tab">BALANCE CHANGES</button>
+          <button class="tab">BUG FIXES</button>
+          <button class="tab">COMMUNITY</button>
+        </div>
+
+        <div class="updates-timeline">
+          {updates.map(update => <UpdateCard {...update} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  main {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .updates-hero {
+    background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 1rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, var(--orange) 0%, var(--white) 50%, var(--orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray);
+    margin-bottom: 3rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+  }
+
+  .stat-card {
+    background: rgba(10, 10, 10, 0.6);
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 69, 0, 0.2);
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: var(--orange);
+  }
+
+  .updates-section {
+    padding: 4rem 0;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+
+  .tab {
+    background: transparent;
+    border: 2px solid rgba(255, 69, 0, 0.2);
+    color: var(--gray);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    border-color: var(--orange);
+    color: var(--white);
+  }
+
+  .tab.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--white);
+  }
+
+  .updates-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .updates-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--orange) 0%, transparent 100%);
+  }
+
+  @media (max-width: 768px) {
+    .filter-tabs {
+      justify-content: flex-start;
+    }
+    
+    .updates-timeline {
+      padding-left: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
